@@ -1,0 +1,19 @@
+{
+  "learnhttp": {
+    "content": "Olá mundo"
+  },
+  "journals": [
+    {
+      "id": "4c0f76e0-8ba5-11ed-8e23-1f566403dece",
+      "content": "",
+      "created_at": "2023-01-03 17:29:18.031733",
+      "updated_at": "2023-01-03 17:29:18.031733"
+    },
+    {
+      "id": "4defa890-8ba5-11ed-8e23-1f566403dece",
+      "content": "sabado bom d+",
+      "created_at": "2022-12-24 17:29:18.257824",
+      "updated_at": "2022-12-24 17:29:18.257824"
+    }
+  ]
+}
