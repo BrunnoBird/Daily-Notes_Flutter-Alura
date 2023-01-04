@@ -20,7 +20,7 @@ class Journal {
         createdAt = DateTime.now(),
         updatedAt = DateTime.now();
 
-//Convertendo de JSON para MAP -> Criando um OBJETO dart.
+//Convertendo de JSON para MAP -> Criando um OBJETO dart. (recebe da API)
   Journal.fromMap(Map<String, dynamic> map)
       : id = map["id"],
         content = map["content"],
@@ -32,6 +32,7 @@ class Journal {
     return "$content \ncreated_at: $createdAt\nupdated_at:$updatedAt";
   }
 
+  //Transforma em MAP para enviar para API
   Map<String, dynamic> toMap() {
     return {
       "id": id,
