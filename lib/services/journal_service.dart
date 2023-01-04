@@ -16,13 +16,16 @@ class JournalService {
     return "$url$resouce";
   }
 
-  Future<bool> register(Journal journal) async {
+  Future<bool> register(Journal journal, {required String token}) async {
     //convertando meu objeto para json depois de transforma-lo para MAP.
     String jsonJournal = json.encode(journal.toMap());
 
     http.Response response = await client.post(
       Uri.parse(getUrl()),
-      headers: {'Content-type': 'application/json'},
+      headers: {
+        'Content-type': 'application/json',
+        "Authorization": "Bearer $token",
+      },
       body: jsonJournal,
     );
 
@@ -33,9 +36,13 @@ class JournalService {
     return false;
   }
 
-  Future<List<Journal>> getAll() async {
+  Future<List<Journal>> getAll(
+      {required String id, required String token}) async {
     http.Response response = await client.get(
-      Uri.parse(getUrl()),
+      Uri.parse("${url}users/$id/journals"),
+      headers: {
+        "Authorization": "Bearer $token",
+      },
     );
     if (response.statusCode != 200) {
       throw Exception();
@@ -57,12 +64,15 @@ class JournalService {
     return list;
   }
 
-  Future<bool> edit(String id, Journal journal) async {
+  Future<bool> edit(String id, Journal journal, {required String token}) async {
     String jsonJournal = json.encode(journal.toMap());
 
     http.Response response = await client.put(
       Uri.parse("${getUrl()}$id"),
-      headers: {'Content-type': 'application/json'},
+      headers: {
+        'Content-type': 'application/json',
+        "Authorization": "Bearer $token",
+      },
       body: jsonJournal,
     );
 

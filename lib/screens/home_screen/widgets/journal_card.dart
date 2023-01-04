@@ -10,12 +10,15 @@ class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
   final Function refreshFunction;
-  const JournalCard(
-      {Key? key,
-      this.journal,
-      required this.showedDate,
-      required this.refreshFunction})
-      : super(key: key);
+  final int userId;
+
+  const JournalCard({
+    Key? key,
+    this.journal,
+    required this.showedDate,
+    required this.refreshFunction,
+    required this.userId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +121,7 @@ class JournalCard extends StatelessWidget {
       content: "",
       createdAt: showedDate,
       updatedAt: showedDate,
+      userId: userId,
     );
 
     Map<String, dynamic> map = {};
