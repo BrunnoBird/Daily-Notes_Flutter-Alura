@@ -9,6 +9,11 @@
       "email": "teste@gmail.com",
       "password": "$2a$10$tvvpddJJIX1ivyseFmdBAeV9oDBZDbHY122kU37enPbMtN2JhbFl2",
       "id": 2
+    },
+    {
+      "email": "testedecriacao@gmail.com",
+      "password": "$2a$10$7ie9ePYwFmC5Th1VqVo7XOfgVbuQYokFz.n8wUoljNmqOWpprNta2",
+      "id": 3
     }
   ],
   "learnhttp": {
@@ -20,13 +25,6 @@
       "content": "Teste para journal",
       "created_at": "2022-12-26 15:27:19.616884",
       "updated_at": "2022-12-26 15:27:19.616884",
-      "userId": 2
-    },
-    {
-      "id": "74148430-8c74-11ed-a10f-f3bf2786eb2a",
-      "content": "sera foi",
-      "created_at": "2022-12-27 18:12:09.132155",
-      "updated_at": "2022-12-27 18:12:09.132155",
       "userId": 2
     }
   ]

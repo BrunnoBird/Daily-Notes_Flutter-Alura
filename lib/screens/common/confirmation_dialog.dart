@@ -32,7 +32,7 @@ Future<dynamic> showConfirmationDialog(
             child: Text(
               affirmativeOption.toUpperCase(),
               style: const TextStyle(
-                color: Colors.blue,
+                color: Colors.brown,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   JournalService service = JournalService();
 
   int? userId;
+  String? userToken;
 
   //Chamado apenas quando a tela é construida pela primeira vez.
   @override
@@ -50,7 +51,54 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: (userId != null)
+      drawer: Drawer(
+        child: Container(
+          color: Colors.black,
+          child: ListView(children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(color: Colors.black),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Bem vindo ao seu diário 📕',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Vamos escrever sua história juntos?',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                logout();
+              },
+              title: const Text(
+                'Sair',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              leading: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+            ),
+            const Divider(color: Colors.white),
+          ]),
+        ),
+      ),
+      body: (userId != null && userToken != null)
           ? ListView(
               controller: _listScrollController,
               children: generateListJournalCards(
@@ -59,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 currentDay: currentDay,
                 database: database,
                 userId: userId!,
+                token: userToken!,
               ),
             )
           : const Center(
@@ -76,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (token != null && email != null && id != null) {
         setState(() {
           userId = id;
+          userToken = token;
         });
 
         service
@@ -91,6 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         Navigator.pushReplacementNamed(context, 'login');
       }
+    });
+  }
+
+  logout() {
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.clear();
+      Navigator.pushReplacementNamed(context, 'login');
     });
   }
 }
