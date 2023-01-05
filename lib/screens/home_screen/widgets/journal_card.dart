@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../helpers/logout.dart';
 import '../../common/confirmation_dialog.dart';
+import '../../common/exception_dialog.dart';
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
@@ -170,12 +174,16 @@ class JournalCard extends StatelessWidget {
         content:
             'Deseja realmente remover o diário do dia ${WeekDay(journal!.createdAt)}?',
         affirmativeOption: "Remover",
-      ).then((value) => {
-            if (value != null)
-              {
-                if (value)
-                  {
-                    service.delete(journal!.id, token: token).then((value) => {
+      ).then(
+        (value) => {
+          if (value != null)
+            {
+              if (value)
+                {
+                  service
+                      .delete(journal!.id, token: token)
+                      .then(
+                        (value) => {
                           if (value == true)
                             {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -193,12 +201,26 @@ class JournalCard extends StatelessWidget {
                                 ),
                               )
                             }
-                        }),
-                  }
-                else
-                  {}
-              },
-          });
+                        },
+                      )
+                      .catchError(
+                    (error) {
+                      logout(context);
+                    },
+                    test: (error) => error is TokenNotValidException,
+                  ).catchError(
+                    (error) {
+                      var innerError = error as HttpException;
+                      showExceptionDialog(context, content: innerError.message);
+                    },
+                    test: (error) => error is HttpException,
+                  ),
+                }
+              else
+                {}
+            },
+        },
+      );
     }
   }
 }
