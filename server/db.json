@@ -22,9 +22,9 @@
   "journals": [
     {
       "id": "6e7fcd70-8c5d-11ed-8cbb-cb7936184189",
-      "content": "Teste para journal",
+      "content": "Teste para journal!!!",
       "created_at": "2022-12-26 15:27:19.616884",
-      "updated_at": "2022-12-26 15:27:19.616884",
+      "updated_at": "2023-01-05 11:46:07.638867",
       "userId": 2
     }
   ]
